@@ -8,9 +8,9 @@
         "about-us": "About Us",
         "project-team": "Project team",
         "guo-gangquan": "Guo Gangquan",
-        "jane-doe": "Jane Doe",
+        "van-phuc": "Van Phuc",
         "kenta-lim": "Kenta Lim",
-        "jean-doe": "Jean Doe",
+        "tze-yan": "Tze Yan",
         "neko-nguyen": "Neko Nguyen"
       },
       "headingKeywords": {}
@@ -131,7 +131,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "studycircle": "StudyCircle"
       },
       "headingKeywords": {}
     },
