@@ -49,7 +49,6 @@ public class StorageManagerTest {
     }
 
     @Test
-    @Disabled("Temorarily disabled")
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
