@@ -17,6 +17,9 @@ public class Prefix {
         this(prefix, false);
     }
 
+    /**
+     * Returns a copy of this prefix with the isUnique flag set to true.
+     */
     public Prefix once() {
         return new Prefix(prefix, true);
     }
