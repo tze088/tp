@@ -6,9 +6,23 @@ package seedu.address.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final boolean isUnique;
+
+    private Prefix(String prefix, boolean isUnique) {
+        this.prefix = prefix;
+        this.isUnique = isUnique;
+    }
 
     public Prefix(String prefix) {
-        this.prefix = prefix;
+        this(prefix, false);
+    }
+
+    public Prefix once() {
+        return new Prefix(prefix, true);
+    }
+
+    public boolean isUnique() {
+        return isUnique;
     }
 
     public String getPrefix() {
