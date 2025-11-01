@@ -323,7 +323,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                 | I want to …​                                                                            | So that I can…​                                                                                     |
+| Priority | As a …​                                                 | I want to …​                                                                            | So that…​                                                                                           |
 |----------|---------------------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | `* * *`  | user                                                    | add contacts from my school projects with their phone numbers and email into the system | I can manage the contact information of all the relevant people for the semester                    |
 | `* * *`  | user                                                    | delete contacts from the contact list when I no longer need a person's contact          | my contact list is not too cluttered.                                                               |
