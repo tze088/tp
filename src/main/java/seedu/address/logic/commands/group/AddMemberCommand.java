@@ -36,7 +36,7 @@ public class AddMemberCommand extends Command {
             + PREFIX_CONTACT_INDEX + "CONTACT_INDEX (must be a positive integer) "
             + "[" + PREFIX_CONTACT_INDEX + "CONTACT_INDEXES]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP_INDEX + "1 "
+            + "1 "
             + PREFIX_CONTACT_INDEX + "2 "
             + PREFIX_CONTACT_INDEX + "3 "
             + PREFIX_CONTACT_INDEX + "4 ";
