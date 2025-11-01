@@ -29,7 +29,7 @@ public class AddMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "add-member";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds persons specified by index number"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds persons specified by index number "
             + "to the group also specified by index number\n"
             + "Parameters: "
             + PREFIX_GROUP_INDEX + "GROUP_INDEX (must be a positive integer) "
