@@ -2,12 +2,10 @@ package seedu.address.logic.parser.group;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
 
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.group.AddMemberCommand;
 import seedu.address.logic.commands.group.DeleteMemberCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -39,7 +37,7 @@ public class DeleteMemberCommandParser implements Parser<DeleteMemberCommand> {
         try {
             groupIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberCommand.MESSAGE_USAGE));
         }
         personIndexes = ParserUtil.parseContactIndexes(argMultimap.getAllValues(PREFIX_CONTACT_INDEX));
 
