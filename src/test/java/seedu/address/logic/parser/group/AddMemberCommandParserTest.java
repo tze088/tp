@@ -27,7 +27,7 @@ public class AddMemberCommandParserTest {
         Set<Index> persons = new HashSet<>();
         persons.add(INDEX_FIRST_PERSON);
 
-        assertParseSuccess(parser, " " + PREFIX_GROUP_INDEX + "3 " + PREFIX_CONTACT_INDEX + "1",
+        assertParseSuccess(parser, " " + "3 " + PREFIX_CONTACT_INDEX + "1",
                 new AddMemberCommand(INDEX_THIRD_GROUP, persons));
     }
 
@@ -37,7 +37,7 @@ public class AddMemberCommandParserTest {
         persons.add(INDEX_FIRST_PERSON);
         persons.add(INDEX_SECOND_PERSON);
 
-        assertParseSuccess(parser, " " + PREFIX_GROUP_INDEX + "3 " + PREFIX_CONTACT_INDEX + "1 "
+        assertParseSuccess(parser, " " + "3 " + PREFIX_CONTACT_INDEX + "1 "
                         + PREFIX_CONTACT_INDEX + "2",
                 new AddMemberCommand(INDEX_THIRD_GROUP, persons));
     }
@@ -51,11 +51,4 @@ public class AddMemberCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
     }
 
-    @Test
-    public void parse_duplicatePrefixes_throwsParseException() {
-        assertParseFailure(parser,
-                " " + PREFIX_GROUP_INDEX + "3 " + PREFIX_GROUP_INDEX + "3 " + PREFIX_CONTACT_INDEX + "1",
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GROUP_INDEX));
-
-    }
 }
