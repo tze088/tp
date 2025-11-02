@@ -40,9 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_GROUP_INDEX + "2 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person's name or phone or email "
-            + "already exists in the address book.\n"
-            + "All name, phone and email need to be unique.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person's email already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_PERSON_IN_GROUP =
             "This person is already in one of the specified groups";
     private final Set<Index> groupsIndexes;

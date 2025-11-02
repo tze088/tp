@@ -10,16 +10,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
 
     public static final String MESSAGE_CONSTRAINTS = "Emails should follow these constraints:\n"
-            + "- is case-sensitive \n"
-            + "- Must start with 'e'\n"
-            + "- Follow by 7 digit\n"
-            + "- Must end with '@u.nus.edu'\n"
-            + "example: e1234567@u.nus.edu";
+            + "your nus ID start with 'e' followed by 7 digits, and is case sensitive\n"
+            + "example: e1234567@u.nus.edu (domain '@u.nus.edu' will be added automatically)";
 
     // must start with e
     // follow by 7 digit
-    // must end with @u.nus.edu
-    public static final String VALIDATION_REGEX = "^e\\d{7}@u\\.nus\\.edu$";
+    public static final String VALIDATION_REGEX = "^e\\d{7}$";
 
     public final String value;
 
@@ -31,7 +27,7 @@ public class Email {
     public Email(String email) {
         requireNonNull(email);
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        value = email + "@u.nus.edu";
     }
 
     /**
