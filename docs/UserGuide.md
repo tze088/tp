@@ -157,7 +157,7 @@ Other parameter are the same as [add-contact](#adding-a-contact-add-contact) com
 Examples:
 
 * `edit-contact 1 n/John p/12345678 e/e1234567@u.nus.edu g/1 g/2` edits the 1st contact in the current displayed 
-  contact list to name John, phone 12345678, email e1234567@u.nus.edu and add John to group 1 and 2.
+  contact list to name John, phone 12345678, email e1234567@u.nus.edu and adds John to group 1 and 2.
 
 ### Listing all contacts : `list-contacts`
 
