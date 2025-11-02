@@ -2,11 +2,11 @@
   "persons": [ {
     "name": "Valid Person",
     "phone": "94824241",
-    "email": "e1234567@u.nus.edu"
+    "email": "e1234567"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
-    "email": "e0234567@u.nus.edu"
+    "email": "e0234567"
   } ],
   "groups" : [ ]
 }
