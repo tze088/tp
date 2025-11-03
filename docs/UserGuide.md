@@ -17,7 +17,7 @@ SC is optimised for use via a Command Line Interface (CLI) while still allowing 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F12-1/tp/releases).
@@ -179,7 +179,7 @@ Finds all contacts whose names contain any of the specified keywords and display
 
 Format: `find-contact KEYWORD [MORE_KEYWORDS]…​`
 
-* `KEYWORD` is case-insensitve <br>
+* `KEYWORD` is case-insensitive <br>
   e.g. finding with `BOB` and `bob` will return the same result
 * One or more keyword can be entered, returning all the contacts which contain either of the keywords <br>
   e.g. `find-contact Bob Alice` will return all contacts with either `Bob` or `Alice` in their names
@@ -244,7 +244,7 @@ index numbers.
 
 Format: `find-group KEYWORD [MORE_KEYWORDS]…​`
 
-* `KEYWORD` is case-insensitve <br>
+* `KEYWORD` is case-insensitive <br>
   e.g. finding with `tp` and `TP` will return the same result
 * One or more keyword can be entered, returning all the groups which contain either of the keywords <br>
   e.g. `find-group tp CS2101` will return all groups with either `tp` or `CS2101` in their names
@@ -370,12 +370,12 @@ Examples:
   ![dashboard](images/example-show-dashboard.png)
 
 ### Saving notes into the dashboard of a group: 
-In the dashboard section, there is a section with an editable white text box which allows you to save any notes to a 
+In the dashboard, there is a section with an editable white text box which allows you to save any notes to a 
 group.
 
 * You can navigate the notes section using your keyboard's arrow keys
 * The notes section will auto-save with every keystroke
-* To clear the note box, you can click the red colour `Clear Notes` button
+* To clear the note box, you can click the red `Clear Notes` button
 
 ### Clearing the StudyCircle contact book : `clear`
 Clears the contact book of all groups and contacts.
