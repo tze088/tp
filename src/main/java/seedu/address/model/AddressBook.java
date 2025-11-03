@@ -100,18 +100,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedPerson);
-
         // Propagate changes to persons throughout the model
-        // TODO: ugly solution, lacking sanity checks
         Set<GroupName> targetGroups = target.getGroups();
         for (Group group : groups) {
             if (targetGroups.contains(group.getName())) {
-                assert group.containsPerson(target) : String.format(MESSAGE_UNSYNC_CASE, group.getName(),
-                        target.getName());
+                // Use strong equality
+                assert group.getPersons().contains(target)
+                        : String.format(MESSAGE_UNSYNC_CASE, group.getName(), target.getName());
                 group.updatePerson(target, editedPerson);
             }
         }
+        persons.setPerson(target, editedPerson);
     }
 
     /**
