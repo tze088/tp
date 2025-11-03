@@ -21,8 +21,8 @@
 
 ## **Setting up, getting started**
 
-Refer to the section "Quick start" in the
-[_User Guide_](UserGuide.md).
+Refer to the guide
+[_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <u>list all groups (UC6)</u> or <u>view a specific group's details (UC8)</u>.
+1.  User requests to <u>list all groups (UC6)</u>.
 2.  User chooses to delete a group from the list.
 3.  SC deletes the group, keeping the member contacts, and displays details of the deleted group.
 
@@ -609,9 +609,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests for a <u>list of groups (UC6)</u>.
-2.  User requests to show details for a specific group.
-3.  SC shows the user the details for the specified group
+1.  User requests to <u>view a specific group's details (UC8)</u>.
+2.  SC shows the user the details for the specified group
 3.  User adds notes to the group.
 
     Use case ends.
@@ -670,6 +669,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Loop step 4 until all Events are added.
 
     Use case ends.
+
+**System: StudyCircle (SC)**  
+**Use Case: UC13 - Delete a contact**  
+**Actor: User**
+
+**MSS**
+
+1.  User requests to <u>list all contacts (UC5)</u>.
+2.  User chooses to delete a contact from the list.
+3.  SC deletes the contact from the list and removes all the groups that he is attached to (if any).
+
+Use case ends.
 
 ### Non-Functional Requirements
 
