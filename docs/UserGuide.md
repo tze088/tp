@@ -85,7 +85,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-## Contact related commands
+## Managing contacts
 ---
 ### Adding a contact: `add-contact`
 
@@ -190,7 +190,7 @@ Examples:
 * `find-contact Aaron Darren` will show the contact list with all people whose name contains either `aaron` or `darren`
 * `find-contact Aa Da` will match `aaron` and `darren`
 
-## Group related commands
+## Managing Groups
 ---
 ### Adding a group : `add-group`
 Adds a new group to the StudyCircle group list.
@@ -258,6 +258,8 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
+## Managing Group Membership
+---
 ### Adding a member to a group : `add-member`
 Adds the specified contacts to the specified group.
 
@@ -298,6 +300,8 @@ Examples:
 * `delete-member 1 c/2` deletes the 2nd contact from the 1st group.
 * `delete-member 1 c/1 c/2` deletes the 1st and 2nd contacts from the 1st group
 
+## Managing Events
+---
 ### Adding an event to a group : `add-event`
 Adds an event to the specified group.
 
@@ -367,6 +371,8 @@ Format: `set-repo GROUP_INDEX r/REPOSITORY_LINK`
 Examples:
 * `set-repo 2 r/https://github.com/AY2526S1-CS2103T-F12-1/tp` sets the repository link in 2nd group to 'https://github.com/AY2526S1-CS2103T-F12-1/tp'
 
+## Managing Links
+---
 ### Getting repository link from a group : `get-repo`
 Retrieves the repository link of the specified group and automatically copies it to your clipboard.
 
@@ -389,6 +395,8 @@ Format: `delete-repo GROUP_INDEX`
 Examples:
 * `delete-repo 1` deletes repository link from the 1st group.
 
+## Group Dashboard
+---
 ### Showing the dashboard of a group: `show-dashboard `
 Shows the dashboard for a group which displays the group's repo link (if any), members, events and notes.
 
@@ -408,6 +416,7 @@ Examples:
 * The dashboard shown will look like the image below
   ![dashboard](images/example-show-dashboard.png)
 
+
 ### Saving notes into the dashboard of a group: 
 In the dashboard, there is a section with an editable white text box which allows you to save any notes to a 
 group.
@@ -416,6 +425,8 @@ group.
 * The notes section will auto-save with every keystroke
 * To clear the note box, you can click the red `Clear Notes` button
 
+## System commands
+---
 ### Clearing the StudyCircle contact book : `clear`
 Clears the contact book of all groups and contacts.
 
@@ -447,10 +458,6 @@ data file at the next run.  Hence, it is recommended to take a backup of the fil
 Furthermore, certain edits can cause StudyCircle to behave in unexpected ways (e.g., if a value entered is outside the 
 acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Linking and redirecting Canvas course website `[coming in v0.1.7]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -499,4 +506,5 @@ Action                | Format, Examples
 **Delete a repository link from a group** | `delete-repo GROUP_INDEX` <br> e.g., `delete-repo 1`
 **Show a group's dashboard** | `show-dashboard GROUP_INDEX`<br> e.g., `show-dashboard 1`
 **Clear StudyCircle contacts and groups**| `clear`
+**Exit the application**| `exit`
 **Help**              | `help`
