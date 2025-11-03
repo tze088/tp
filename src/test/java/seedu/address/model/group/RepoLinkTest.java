@@ -41,16 +41,23 @@ public class RepoLinkTest {
         // invalid links
         assertFalse(RepoLink.isValidName("")); // empty string
         assertFalse(RepoLink.isValidName(" ")); // spaces only
+        assertFalse(RepoLink.isValidName("https://")); // only protocol
         assertFalse(RepoLink.isValidName("https://git^hub.com/user/repo")); //special characters in domain
         assertFalse(RepoLink.isValidName("https://github.com/user^/repo")); //special characters in username
         assertFalse(RepoLink.isValidName("https://github.com/user/re^po")); //special characters in repository
         assertFalse(RepoLink.isValidName("https://github.c/user/repo")); // incorrect TLD
+        assertFalse(RepoLink.isValidName("https://github.com/user/repo"
+                + "c".repeat(200))); // >200 characters
 
         // valid links
+        assertTrue(RepoLink.isValidName("https://github.com/user/repo")); // normal link
+        assertTrue(RepoLink.isValidName("github.com/user/repo")); // missing protocol
         assertTrue(RepoLink.isValidName("https://github.com/u-ser/repo")); // - in username
         assertTrue(RepoLink.isValidName("https://github.com/user/repo-ro")); // - in repository
         assertTrue(RepoLink.isValidName("https://github.com/user/repo.ro")); // . in repository
         assertTrue(RepoLink.isValidName("https://github.com/user/repo_ro")); // _ in repository
+        assertTrue(RepoLink.isValidName("https://github.com/user/repo"
+                + "c".repeat(172))); // total 200 characters
     }
 
     @Test
