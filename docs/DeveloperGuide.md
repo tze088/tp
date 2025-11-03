@@ -138,6 +138,7 @@ The `Model` component,
 * stores all `Person` and `Event` objects which belong to each `Group` (contained in a `UniquePersonList` and `UniqueEventList` object respectively).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+See [The Group Model](#the-group-model) for more information about `Group`s.
 
 
 ### Storage component
@@ -170,7 +171,8 @@ The edit contact command is newly added feature in StudyCircle, extended from th
 * `Email` — The email of the contact.
 * `Group names` — The group names of the groups which the contact is in.
 
-The fields can be edited when the user use the following prefixes: `n/`, `e/`, `p/` and `g/` respectively. Additionally, the prefix `g/` can be use multiple times in a single command to add the contact into multiple groups at a time.
+The fields can be edited when the user use the following prefixes: `n/`, `e/`, `p/` and `g/` respectively. 
+Additionally, the prefix `g/` can be used multiple times in a single command to add the contact into multiple groups at a time.
 
 <box type="info" seamless>
 
@@ -193,11 +195,59 @@ and several contacts with their following information:
 
 Step 2. The user executes the command `edit-contact 1 n/Bobby e/e7654321@u.nus.edu g/1 g/3` to change Bob's name into Bobby, email to e7654321@u.nus.edu and change Bob's groups to CS2103T and CS2101 CA2.
 
-The command parse through each prefix to have the edited fields. The `edit-contact` command then create a new contact with the new name, email and groups fields. Sync the internal list of the groups and the contacts. Then the command sets Bob's contact to the newly created one. 
+The command parses through each prefix to have the edited fields. The `edit-contact` command then create a new 
+contact with the new name, email and groups fields. Syncs the internal list of the groups and the contacts. Then the 
+command sets Bob's contact to the newly created one. 
 
 The following sequence diagram shows how an edit-contact operations goes through the `Logic` component:
 
 <puml src="diagrams/EditContactSequenceDiagram.puml" alt="EditContactSequenceDiagram" />
+
+### The Group Model
+
+#### Overview
+
+Groups are a newly added feature in StudyCircle.
+
+A `Group` has:
+* `GroupName`: A unique identifier for the group.
+* `UniquePersonList`: A list of members within the group.
+* `UniqueEventList`: A list of events associated with the group.
+* `Dashboard`: A custom dashboard for managing group-related data.
+* [Optional] `RepoLink`: A URL to a repository associated with the group.
+
+and are stored in a single `UniqueGroupList` within an `AddressBook`.
+
+#### Key Components
+##### Unique Lists
+The implementation of `UniqueGroupList` and `UniqueEventList` follow the `UniquePersonList` pattern - that is, they are wrappers on an `ObservableList` which prevent the addition of duplicate entries.
+
+##### Group Display in GUI
+Groups are displayed in a list in the GUI, similar to the contact list in AB3. It can be filtered using predicates, similar to the contact list.
+Each group card in the list displays embedded lists for both **members** and **events**.
+JavaFX is used to ensure that the ObservableLists for groups, persons, and events are dynamically reflected in the GUI. Any changes made to the lists will be automatically updated in the UI.
+
+#### Invariants
+To maintain the integrity of the application, the following invariants must be respected:
+
+* **Persons in a Group:** Each person in a group must exist in the Contact List. If a person is part of a group, that person should also be present in the global list of contacts.
+
+* **Group Membership:** A group’s members must have its name as part of their list of GroupNames. Conversely, all of a person's GroupNames should correspond to valid groups in the application of which they are members.
+
+#### Caution: Immutability of Persons and Events
+* **Persons and Events are Immutable:** Both the Person and Event classes are designed to be immutable to ensure consistency in the application’s state.
+
+* **Synchronisation:** Care must be taken to ensure that the references to Persons in the group list and the global contact list remain synchronised.
+    * Use Existing High-Level Methods (e.g., `Model#setPerson`): To modify a person’s details, always use the existing method `Model#setPerson`. This method ensures updates are properly synchronised across the model. Avoid manually calling lower-level methods like `UniquePersonList#setPerson`.
+    * Note: setPerson is a well-implemented method and serves as a good example for handling updates. While the codebase isn't fully consistent, use similar methods for other objects when available, or manually ensure synchronisation when necessary.
+
+The immutability of Persons and Events allows for future implementation of features such as:
+
+* **State Saving:** Enabling features like undo/redo.
+
+* **Concurrency:** Maintaining data consistency when multiple users or threads are interacting with the application.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### \[Proposed\] Undo/redo feature
 
@@ -290,6 +340,10 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+--------------------------------------------------------------------------------------------------------------------
+## **Planned Enhancements**
+Team size: 5
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -313,7 +367,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**:
 * It is hard to manage the members of each specific group\
-  The app allow Creation of groups and subgroups
+  The app allows Creation of groups and subgroups
 
 * With many groups at the same time, it can become difficult to know when each one needs your attention.\
   The app helps you manage your deadlines and meetings for each group
@@ -490,7 +544,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all contacts.
-2.  SC display a list of all contacts and their details.
+2.  SC displays a list of all contacts and their details.
 
   Use case ends.
 
@@ -638,7 +692,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests for a <u>list of contacts (UC5)</u>.
 2.  User specifies a specific contact and selects which detail they would like to edit.
 3.  User enters new details that they want to edit.
-4.  SC edit the contact and display a confirmation message.
+4.  SC edits the contact and display a confirmation message.
 
     Use case ends.
 
@@ -664,7 +718,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User <u>adds notes to this group (UC10)</u>.
 3.  User <u>attaches a contact to this group (UC3)</u>.
     Loop step 3 until all needed contacts are added.
-4.  User <u>creates an Event (UC9o)</u>.
+4.  User <u>creates an Event (UC9)</u>.
 
     Loop step 4 until all Events are added.
 
@@ -678,7 +732,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list all contacts (UC5)</u>.
 2.  User chooses to delete a contact from the list.
-3.  SC deletes the contact from the list and removes all the groups that he is attached to (if any).
+3.  SC deletes the contact from the list and removes all the groups that they are attached to (if any).
 
 Use case ends.
 
@@ -770,13 +824,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all contacts using the `list-contacts` command. Multiple contacts in the contact list.
 
-    1. Test case: `delete-contact 1`<br>
+    2. Test case: `delete-contact 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete-contact 0`<br>
+    3. Test case: `delete-contact 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete-contact`, `delete-contact x`, `...` (where x is larger than the contact list size)<br>
+    4. Other incorrect delete commands to try: `delete-contact`, `delete-contact x`, `...` (where x is larger than the 
+       contact list size)<br>
        Expected: Similar to previous.
 
 ### Editing a contact
@@ -786,7 +841,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: must have at least one contact in the contact list
 
     1. Test case: `edit-contact 1 n/mary`<br>
-       Expected: Fist contact name in the contact list should change to mary
+       Expected: First contact name in the contact list should change to mary
 
 ### Listing all groups
 
@@ -950,7 +1005,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Add an event to a specified group
 
-    1. Prerequisites 1: List all groups using the `list-groups` command. Multiple groups in the group list.
+    1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `add-event 1 d/abc`<br>
        Expected: The status message show: `New event: 'abc' added to group: <1st GROUP NAME>`, an event `abc` appear in the group card of the 1st group.
@@ -959,7 +1014,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Delete a specified event from a specified group
 
-    1. Prerequisites 1: List all groups using the `list-groups` command. Multiple groups in the group list.
+    1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `delete-event 1 e/1`<br>
        Expected: The status message show: `Event: '<1st EVENT DESCRIPTION>' deleted from group: <1st GROUP NAME>`, the first event disappeared in the group card of the 1st group.
@@ -968,15 +1023,28 @@ testers are expected to do more *exploratory* testing.
 
 1. Edit a specified event in a specified group
 
-    1. Prerequisites 1: List all groups using the `list-groups` command. Multiple groups in the group list.
+    1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `edit-event 1 e/1 d/efg`<br>
-       Expected: The status message show: `Edited Event: '<1st EVENT DESCRIPTION>' in Group: <1st GROUP NAME>`, the first event change to `efg` in the group card of the 1st group.
+       Expected: The status message show: `Edited Event: '<1st EVENT DESCRIPTION>' in Group: <1st GROUP NAME>`, the 
+       first event changes to `efg` in the group card of the 1st group.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data file
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: If you have pre-existing data saved in StudyCircle, make sure you have a backup of the `data` 
+       folder that is found in the home folder of `StudyCircle.jar`
 
-1. _{ more test cases …​ }_
+    1. Test case: Click into the `data` folder and the `addressbook.json` file. Inside the file edit the data with 
+       invalid inputs (e.g. An email which does not follow the correct format).
+       Expected: All the contacts and groups will be cleared when StudyCircle is launched due to the corrupted data file
+
+2. Restoring the sample data in the contact book
+
+    1. Prerequisites: You must already have an existing `addressbook.json` file in the `data` folder which is found 
+       in the home folder of `StudyCircle.jar`
+
+    1. Test case: Delete the `addressbook.json` file 
+       Expected: Upon the next launch of StudyCircle, the contact book will be repopulated with the sample data
+
