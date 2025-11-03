@@ -138,7 +138,7 @@ The `Model` component,
 * stores all `Person` and `Event` objects which belong to each `Group` (contained in a `UniquePersonList` and `UniqueEventList` object respectively).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-See [The Group Model](#the-group-model)) for more information about `Group`s.
+See [The Group Model](#the-group-model) for more information about `Group`s.
 
 
 ### Storage component
@@ -160,49 +160,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
-
-### Edit Contact feature
-
-The edit contact command is newly added feature in StudyCircle, extended from the original AB3 application. It supports editing various fields of the specified contact:
-
-* `Name` — The name of the contact.
-* `Phone` — The phone number of the contact.
-* `Email` — The email of the contact.
-* `Group names` — The group names of the groups which the contact is in.
-
-The fields can be edited when the user use the following prefixes: `n/`, `e/`, `p/` and `g/` respectively. Additionally, the prefix `g/` can be use multiple times in a single command to add the contact into multiple groups at a time.
-
-<box type="info" seamless>
-
-**Note:** The prefix `g/` for editing groups when used will remove the contact from all the original groups and add the new groups based on the given command. 
-
-</box>
-
-Given below is an example usage scenario and how the edit-contact command behaves at each step.
-
-Step 1. The user initiates the app with several groups:
-
-1. CS2103T
-2. CS2101 CA1
-3. CS2101 CA2
-
-and several contacts with their following information:
-
-1. Bob - 80324084 - e1234567@u.nus.edu - groups: CS2101 CA1
-2. Mary - 32404140 - e3224335@u.nus.edu - groups: CS2103T, CS2101 CA1
-
-Step 2. The user executes the command `edit-contact 1 n/Bobby e/e7654321@u.nus.edu g/1 g/3` to change Bob's name into Bobby, email to e7654321@u.nus.edu and change Bob's groups to CS2103T and CS2101 CA2.
-
-The command parse through each prefix to have the edited fields. The `edit-contact` command then create a new contact with the new name, email and groups fields. Sync the internal list of the groups and the contacts. Then the command sets Bob's contact to the newly created one. 
-
-The following sequence diagram shows how an edit-contact operations goes through the `Logic` component:
-
-<puml src="diagrams/EditContactSequenceDiagram.puml" alt="EditContactSequenceDiagram" />
-
 ### The Group Model
 
-## Overview
+#### Overview
 
 Groups are a newly added feature in StudyCircle.
 
@@ -215,23 +175,23 @@ A `Group` has:
 
 and are stored in a single `UniqueGroupList` within an `AddressBook`.
 
-## Key Components
-# Unique Lists
+#### Key Components
+##### Unique Lists
 The implementation of `UniqueGroupList` and `UniqueEventList` follow the `UniquePersonList` pattern - that is, they are wrappers on an `ObservableList` which prevent the addition of duplicate entries.
 
-# Group Display in GUI
+##### Group Display in GUI
 Groups are displayed in a list in the GUI, similar to the contact list in AB3. It can be filtered using predicates, similar to the contact list.
 Each group card in the list displays embedded lists for both **members** and **events**.
 JavaFX is used to ensure that the ObservableLists for groups, persons, and events are dynamically reflected in the GUI. Any changes made to the lists will be automatically updated in the UI.
 
-## Invariants
+#### Invariants
 To maintain the integrity of the application, the following invariants must be respected:
 
 * **Persons in a Group:** Each person in a group must exist in the Contact List. If a person is part of a group, that person should also be present in the global list of contacts.
 
 * **Group Membership:** A group’s members must have its name as part of their list of GroupNames. Conversely, all of a person's GroupNames should correspond to valid groups in the application of which they are members.
 
-## Caution: Immutability of Persons and Events
+#### Caution: Immutability of Persons and Events
 * **Persons and Events are Immutable:** Both the Person and Event classes are designed to be immutable to ensure consistency in the application’s state.
 
 * **Synchronisation:** Care must be taken to ensure that the references to Persons in the group list and the global contact list remain synchronised.
