@@ -34,9 +34,9 @@ public class GroupTest {
         editedCS2103T = new GroupBuilder(CS2103T).withName("New name").build();
         assertFalse(CS2103T.isSameGroup(editedCS2103T));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Group editedIS1108 = new GroupBuilder().withName("IS1108".toLowerCase()).build();
-        assertFalse(IS1108.isSameGroup(editedIS1108));
+        assertTrue(IS1108.isSameGroup(editedIS1108));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = "IS1108" + " ";

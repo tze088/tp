@@ -98,7 +98,7 @@ Format: `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​`
 * Should not be empty or contain only whitespace
 * Maximum length: 50 characters
 * Alphanumeric characters and spaces allowed <span style="color:grey">(no consecutive spaces)</span>
-* May include _s/o_ or _d/o_ between names
+* May include _s/o_ ("son of") or _d/o_ ("daughter of") between names
 * Leading and trailing spaces are automatically removed.
 
 `PHONE_NUMBER` Constraints:
@@ -122,7 +122,7 @@ Format: `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​`
 
 <box type="tip" block>
 
-**Tip:** A contact can be added to multiple groups at once by specifying multiple `g/` prefixes and `GROUP_INDEX` should no t be blank
+**Tip:** A contact can be added to multiple groups at once by specifying multiple `g/` prefixes and `GROUP_INDEX` should not be blank
 </box>
 
 Examples:
@@ -193,7 +193,7 @@ Examples:
 ## Group related commands
 ---
 ### Adding a group : `add-group`
-Adds a new group to StudyCircle group list.
+Adds a new group to the StudyCircle group list.
 
 Format: `add-group n/GROUP_NAME`
 
@@ -203,7 +203,7 @@ Format: `add-group n/GROUP_NAME`
 * Maximum length: 50 characters
 <box type="warning" block>
 
-**Duplicate handling:** Group names must be unique in both name and case.
+**Duplicate handling:** Each group name must be unique. Names are case-insensitive (e.g., “Team” and “team” are treated as duplicate names).
 
 </box>
 Examples:
@@ -211,7 +211,7 @@ Examples:
 * `add-group n/Project Group A` adds a group with name `Project Group A` to StudyCircle
 
 ### Deleting a group : `delete-group`
-Deletes the specified group from StudyCircle group list.
+Deletes the specified group from the StudyCircle group list.
 
 Format: `delete-group GROUP_INDEX`
 
@@ -223,7 +223,7 @@ Examples:
 * `delete-group 1` deletes the 1st group in the current displayed group list.
 
 ### Edit a group : `edit-group`
-Edit the specified group from StudyCircle group list.
+Edit the specified group from the StudyCircle group list.
 
 Format: `edit-group GROUP_INDEX n/GROUP_NAME`
 
@@ -273,7 +273,7 @@ Format: `add-member GROUP_INDEX c/CONTACT_INDEX [c/CONTACT_INDEX]…​`
 
 <box type="warning" block>
 
-**Caution:** Editing multiple groups at once is not supported. 
+**Caution:** Adding members to multiple groups at once is not supported. 
 </box>
 
 Examples:
@@ -336,7 +336,7 @@ Examples:
 * `set-repo 2 r/https://github.com/AY2526S1-CS2103T-F12-1/tp` sets the repository link in 2nd group to 'https://github.com/AY2526S1-CS2103T-F12-1/tp'
 
 ### Getting repository link from a group : `get-repo`
-Retrieves the repository link of the specified group and auto copy to your clipboard.
+Retrieves the repository link of the specified group and automatically copies it to your clipboard.
 
 Format: `get-repo GROUP_INDEX`
 
