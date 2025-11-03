@@ -150,7 +150,7 @@ Format: `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP_INDEX]
 `CONTACT_INDEX` Constraints:
 * Should match an index in the currently displayed contact list.
 
-Other parameter are the same as [add-contact](#adding-a-contact-add-contact) command
+Other parameter constraints are the same as in [add-contact](#adding-a-contact-add-contact).
 
 <box type="warning" block>
 
