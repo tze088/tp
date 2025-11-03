@@ -170,7 +170,8 @@ The edit contact command is newly added feature in StudyCircle, extended from th
 * `Email` — The email of the contact.
 * `Group names` — The group names of the groups which the contact is in.
 
-The fields can be edited when the user use the following prefixes: `n/`, `e/`, `p/` and `g/` respectively. Additionally, the prefix `g/` can be use multiple times in a single command to add the contact into multiple groups at a time.
+The fields can be edited when the user use the following prefixes: `n/`, `e/`, `p/` and `g/` respectively. 
+Additionally, the prefix `g/` can be used multiple times in a single command to add the contact into multiple groups at a time.
 
 <box type="info" seamless>
 
@@ -193,7 +194,9 @@ and several contacts with their following information:
 
 Step 2. The user executes the command `edit-contact 1 n/Bobby e/e7654321@u.nus.edu g/1 g/3` to change Bob's name into Bobby, email to e7654321@u.nus.edu and change Bob's groups to CS2103T and CS2101 CA2.
 
-The command parse through each prefix to have the edited fields. The `edit-contact` command then create a new contact with the new name, email and groups fields. Sync the internal list of the groups and the contacts. Then the command sets Bob's contact to the newly created one. 
+The command parses through each prefix to have the edited fields. The `edit-contact` command then create a new 
+contact with the new name, email and groups fields. Syncs the internal list of the groups and the contacts. Then the 
+command sets Bob's contact to the newly created one. 
 
 The following sequence diagram shows how an edit-contact operations goes through the `Logic` component:
 
@@ -313,7 +316,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**:
 * It is hard to manage the members of each specific group\
-  The app allow Creation of groups and subgroups
+  The app allows Creation of groups and subgroups
 
 * With many groups at the same time, it can become difficult to know when each one needs your attention.\
   The app helps you manage your deadlines and meetings for each group
@@ -490,7 +493,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all contacts.
-2.  SC display a list of all contacts and their details.
+2.  SC displays a list of all contacts and their details.
 
   Use case ends.
 
@@ -638,7 +641,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests for a <u>list of contacts (UC5)</u>.
 2.  User specifies a specific contact and selects which detail they would like to edit.
 3.  User enters new details that they want to edit.
-4.  SC edit the contact and display a confirmation message.
+4.  SC edits the contact and display a confirmation message.
 
     Use case ends.
 
@@ -664,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User <u>adds notes to this group (UC10)</u>.
 3.  User <u>attaches a contact to this group (UC3)</u>.
     Loop step 3 until all needed contacts are added.
-4.  User <u>creates an Event (UC9o)</u>.
+4.  User <u>creates an Event (UC9)</u>.
 
     Loop step 4 until all Events are added.
 
@@ -678,7 +681,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list all contacts (UC5)</u>.
 2.  User chooses to delete a contact from the list.
-3.  SC deletes the contact from the list and removes all the groups that he is attached to (if any).
+3.  SC deletes the contact from the list and removes all the groups that they are attached to (if any).
 
 Use case ends.
 
@@ -787,7 +790,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: must have at least one contact in the contact list
 
     1. Test case: `edit-contact 1 n/mary`<br>
-       Expected: Fist contact name in the contact list should change to mary
+       Expected: First contact name in the contact list should change to mary
 
 ### Listing all groups
 
@@ -972,7 +975,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `edit-event 1 e/1 d/efg`<br>
-       Expected: The status message show: `Edited Event: '<1st EVENT DESCRIPTION>' in Group: <1st GROUP NAME>`, the first event change to `efg` in the group card of the 1st group.
+       Expected: The status message show: `Edited Event: '<1st EVENT DESCRIPTION>' in Group: <1st GROUP NAME>`, the 
+       first event changes to `efg` in the group card of the 1st group.
 
 ### Saving data
 
