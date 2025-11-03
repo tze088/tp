@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Description;
@@ -23,11 +24,11 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("e1234567"),
-                new HashSet<>()),
+                new HashSet<>(Set.of(new GroupName("CS2103T")))),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("e0234567"),
-                new HashSet<>()),
+                new HashSet<>(Set.of(new GroupName("CS2103T")))),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("e1934567"),
-                new HashSet<>()),
+                new HashSet<>(Set.of(new GroupName("CS2103T")))),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("e1244567"),
                 new HashSet<>()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("e1274567"),
@@ -57,6 +58,13 @@ public class SampleDataUtil {
         for (Group sampleGroup : getSampleGroups()) {
             sampleAb.addGroup(sampleGroup);
         }
+
+        Group toAddTo = sampleAb.getGroupList().get(0);
+        ObservableList<Person> personList = sampleAb.getPersonList();
+
+        toAddTo.addPerson(personList.get(0));
+        toAddTo.addPerson(personList.get(1));
+        toAddTo.addPerson(personList.get(2));
 
         return sampleAb;
     }
