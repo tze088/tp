@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
 
     public static final String MESSAGE_CONSTRAINTS = "Emails should follow these constraints:\n"
-            + "your nus ID start with 'e' followed by 7 digits, and is case sensitive\n"
-            + "example: e1234567@u.nus.edu (domain '@u.nus.edu' will be added automatically)";
+            + "An NUS ID starting with 'e' followed by 7 digits (case sensitive)\n"
+            + "example: e1234567 (domain '@u.nus.edu' will be added automatically)";
 
     // must start with e
     // follow by 7 digit
