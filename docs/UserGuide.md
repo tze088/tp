@@ -98,7 +98,7 @@ Format: `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​`
 * Should not be empty or contain only whitespace
 * Maximum length: 50 characters
 * Alphanumeric characters and spaces allowed <span style="color:grey">(no consecutive spaces)</span>
-* May include _s/o_ ("son of") or _d/o_ ("daughter of") between names
+* May include 's/o' ("son of") or 'd/o' ("daughter of") between names
 * Leading and trailing spaces are automatically removed.
 
 `PHONE_NUMBER` Constraints:
@@ -106,9 +106,10 @@ Format: `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​`
 * Minimum 8 digits
 * Maximum 15 digits
 
-`EMAIL` Constraints: Your NUS ID
-* Must start with ‘e’ (case-sensitive)
-* Followed by 7 digits
+`EMAIL` Constraints:
+* Must be a valid nus ID
+* Must start with ‘e’ (case-sensitive), followed by 7 digits
+* Example: e0123456
 * The domain ‘@u.nus.edu’ is added automatically — you do not need to include it
 
 `GROUP_INDEX` Constraints:
@@ -127,7 +128,7 @@ Format: `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​`
 
 Examples:
 * `add-contact n/John Doe p/98765432 e/e1234567` adds a contact with name: John Doe, phone: 98765432, email: e1234567@u.nus.edu to the contact list.
-* `add-contact n/Betsy Crowe g/1 e/e1232567 p/12345678 g/2` adds a contact with name: Betsy Crowe, phone: 12345678, email: e1232567@u.nus.edu to the contact list and add Betsy Crowe to group 1, 2.
+* `add-contact n/Betsy Crowe e/e1232567 p/12345678 g/1 g/2` adds a contact with name: Betsy Crowe, phone: 12345678, email: e1232567@u.nus.edu to both the contact list and groups 1, 2.
 
 ### Deleting a contact : `delete-contact`
 Deletes the specified contact from the StudyCircle contact list.
@@ -135,8 +136,7 @@ Deletes the specified contact from the StudyCircle contact list.
 Format: `delete-contact CONTACT_INDEX`
 
 * Deletes the contact at the specified `CONTACT_INDEX`.
-* The `CONTACT_INDEX` refers to the index number shown in the displayed contact list.
-* The `CONTACT_INDEX` **must be a positive integer** 1, 2, 3, …​
+* The `CONTACT_INDEX` should match an index in the currently displayed contact list
 
 Examples:
 
@@ -148,7 +148,7 @@ Edits the details of the specified contact's name, phone, email and groups.
 Format: `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP_INDEX]...`
 
 `CONTACT_INDEX` Constraints:
-* Should match an index in the currently displayed contact list
+* Should match an index in the currently displayed contact list.
 
 Other parameter are the same as [add-contact](#adding-a-contact-add-contact) command
 
@@ -215,9 +215,8 @@ Deletes the specified group from the StudyCircle group list.
 
 Format: `delete-group GROUP_INDEX`
 
-* Deletes the group at the specified `GROUP_INDEX`.
-* The `GROUP_INDEX` refers to the index number shown in the displayed group list.
-* The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
+`GROUP INDEX` Constraints:
+* Should match an index in the currently displayed group list.
 
 Examples:
 * `delete-group 1` deletes the 1st group in the current displayed group list.
@@ -227,11 +226,16 @@ Edit the specified group from the StudyCircle group list.
 
 Format: `edit-group GROUP_INDEX n/GROUP_NAME`
 
-* The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `GROUP_NAME` Constraint is same as [add-group](#adding-a-group-add-group) command
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`GROUP_NAME` Constraints:
+* May contain alphanumeric characters, spaces, and the following symbols: `-`, `_`, `(`, `)`
+* Must not be blank
+* Maximum length: 50 characters
 
 Examples:
-* `edit-group 1 n/cs2103 team 1` edits the 1st group in the current displayed group list.
+* `edit-group 1 n/cs2103 team 1` edits the 1st group in the current displayed group list to have the name `cs2103 team 1`.
 
 ### Listing all groups : `list-groups`
 Shows a list of all groups with their members and events in the current displayed group list.
@@ -262,9 +266,11 @@ Adds the specified contacts to the specified group.
 
 Format: `add-member GROUP_INDEX c/CONTACT_INDEX [c/CONTACT_INDEX]…​`
 
-* Both `GROUP_INDEX` and `CONTACT_INDEXES` **must be positive integers** 1, 2, 3, …​
-* `CONTACT_INDEXES` can be one or multiple contact indexes
-* `CONTACT_INDEXES` are taken from the currently displayed contact list
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`CONTACT_INDEX` Constraints:
+* Should match an index in the currently displayed contact list.
 
 <box type="tip" block>
 
@@ -285,6 +291,12 @@ Deletes the specified contacts from the specified group.
 
 Format: `delete-member GROUP_INDEX c/CONTACT_INDEX [c/CONTACT_INDEX]…​`
 
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`CONTACT_INDEX` Constraints:
+* Should match an index in the currently displayed contact list.
+
 Examples:
 * `delete-member 1 c/2` deletes the 2nd contact from the 1st group.
 * `delete-member 1 c/1 c/2` deletes the 1st and 2nd contacts from the 1st group
@@ -294,18 +306,25 @@ Adds an event to the specified group.
 
 Format: `add-event GROUP_INDEX d/DESCRIPTION`
 
-* The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`DESCRIPTION` Constraints:
+* Should not be blank.
 
 Examples:
-* `add-event 1 d/MVP Feature Specifications` adds the event `MVP Feature Specifications` to the 1st group
+* `add-event 1 d/Report due 31/10 14:00` adds the event `Report due 31/10 14:00` to the 1st group
 
 ### Deleting an event from a group : `delete-event`
 Deletes the specified event from the specified group.
 
 Format: `delete-event GROUP_INDEX  e/EVENT_INDEX`
 
-* Both `GROUP_INDEX` and `EVENT_INDEX` **must be positive integers** 1, 2, 3, …​
-* `EVENT_INDEX` are taken from the current displayed event list
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`EVENT_INDEX` Constraints:
+* Should match an index in the event list of the group specified by `GROUP_INDEX`.
 
 Examples:
 * `delete-event 1 e/2` deletes the 2nd event from the 1st group.
@@ -315,6 +334,15 @@ Edits an event description in the specified group.
 
 Format: `edit-event GROUP_INDEX e/EVENT_INDEX  d/EVENT_DESCRIPTION`
 
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`EVENT_INDEX` Constraints:
+* Should match an index in the event list of the group specified by `GROUP_INDEX`.
+
+`DESCRIPTION` Constraints:
+* Should not be blank.
+
 Examples:
 * `edit-event 1 e/2 d/MVP Feature Specifications` edits the 2nd event in the 1st group to `MVP Feature Specifications`
 
@@ -322,6 +350,9 @@ Examples:
 Set repository link for the specified group.
 
 Format: `set-repo GROUP_INDEX r/REPOSITORY_LINK`
+
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
 
 `REPOSITORY_LINK` Constraints:
 * format: \<Domain\>/\<Username or Org\>/\<Repository name\>
@@ -340,7 +371,8 @@ Retrieves the repository link of the specified group and automatically copies it
 
 Format: `get-repo GROUP_INDEX`
 
-* The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
 
 Examples:
 * `get-repo 2` will get the repository link in 2nd group and copy it to your clipboard.
@@ -350,7 +382,8 @@ Deletes the specified repository link from the specified group.
 
 Format: `delete-repo GROUP_INDEX`
 
-* The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
 
 Examples:
 * `delete-repo 1` deletes repository link from the 1st group.
@@ -360,9 +393,14 @@ Shows the dashboard for a group which displays the group's repo link (if any), m
 
 Format: `show-dashboard GROUP_INDEX`
 
-* The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
-* While the dashboard is showing, editing that group's fields (members/events/repolink/name) will not update the 
-  showing dashboard and will require another `show-dashboard` command to update those fields
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+<box type="warning" block>
+
+**Caution:** While the dashboard is showing, editing that group's fields (members/events/repolink/name) will not update the
+showing dashboard and will require another `show-dashboard` command to update those fields.
+</box>
 
 Examples:
 * `show-dashboard 1` shows the dashboard of group 1.
@@ -430,6 +468,7 @@ contains the data of your previous StudyCircle home folder.
    This leads to the need to use a scroll bar to scroll through that group's events/members if there are too many 
    items in either category.
 3. **If you minimize the Help Window** and then run the help command (or use the Help menu, or the keyboard shortcut F1) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+4. **If an event's description is too long**, it will not wrap properly in the group dashboard window, and you will need to scroll horizontally to read the full text.
 
 
 --------------------------------------------------------------------------------------------------------------------
