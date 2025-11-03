@@ -130,20 +130,8 @@ Examples:
 * `add-contact n/John Doe p/98765432 e/e1234567` adds a contact with name: John Doe, phone: 98765432, email: e1234567@u.nus.edu to the contact list.
 * `add-contact n/Betsy Crowe e/e1232567 p/12345678 g/1 g/2` adds a contact with name: Betsy Crowe, phone: 12345678, email: e1232567@u.nus.edu to both the contact list and groups 1, 2.
 
-### Deleting a contact : `delete-contact`
-Deletes the specified contact from the StudyCircle contact list.
-
-Format: `delete-contact CONTACT_INDEX`
-
-* Deletes the contact at the specified `CONTACT_INDEX`.
-* The `CONTACT_INDEX` should match an index in the currently displayed contact list
-
-Examples:
-
-* `delete-contact 1` deletes the 1st contact in the current displayed contact list.
-
 ### Editing a contact : `edit-contact`
-Edits the details of the specified contact's name, phone, email and groups.
+Edits the details of the specified contact. Only the specified fields will be overwritten.
 
 Format: `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP_INDEX]...`
 
@@ -165,8 +153,20 @@ Other parameter constraints are the same as in [add-contact](#adding-a-contact-a
 
 Examples:
 
-* `edit-contact 1 n/John p/12345678 e/e1234567 g/1 g/2` edits the 1st contact in the current displayed 
+* `edit-contact 1 n/John p/12345678 e/e1234567 g/1 g/2` edits the 1st contact in the current displayed
   contact list to name John, phone 12345678, email e1234567@u.nus.edu and adds John to group 1 and 2.
+
+### Deleting a contact : `delete-contact`
+Deletes the specified contact from the StudyCircle contact list.
+
+Format: `delete-contact CONTACT_INDEX`
+
+`CONTACT_INDEX` Constraints:
+* Should match an index in the currently displayed contact list.
+
+Examples:
+
+* `delete-contact 1` deletes the 1st contact in the current displayed contact list.
 
 ### Listing all contacts : `list-contacts`
 
@@ -210,6 +210,16 @@ Examples:
 * `add-group n/CS2103T` adds a group with name `CS2103T` to StudyCircle
 * `add-group n/Project Group A` adds a group with name `Project Group A` to StudyCircle
 
+### Edit a group : `edit-group`
+Edit the specified group from the StudyCircle group list.
+
+Format: `edit-group GROUP_INDEX n/GROUP_NAME`
+
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+Other parameter constraints are the same as in [add-group](#adding-a-group--add-group).
+
 ### Deleting a group : `delete-group`
 Deletes the specified group from the StudyCircle group list.
 
@@ -220,19 +230,6 @@ Format: `delete-group GROUP_INDEX`
 
 Examples:
 * `delete-group 1` deletes the 1st group in the current displayed group list.
-
-### Edit a group : `edit-group`
-Edit the specified group from the StudyCircle group list.
-
-Format: `edit-group GROUP_INDEX n/GROUP_NAME`
-
-`GROUP_INDEX` Constraints:
-* Should match an index in the currently displayed group list.
-
-`GROUP_NAME` Constraints:
-* May contain alphanumeric characters, spaces, and the following symbols: `-`, `_`, `(`, `)`
-* Must not be blank
-* Maximum length: 50 characters
 
 Examples:
 * `edit-group 1 n/cs2103 team 1` edits the 1st group in the current displayed group list to have the name `cs2103 team 1`.
@@ -313,21 +310,7 @@ Format: `add-event GROUP_INDEX d/DESCRIPTION`
 * Should not be blank.
 
 Examples:
-* `add-event 1 d/Report due 31/10 14:00` adds the event `Report due 31/10 14:00` to the 1st group
-
-### Deleting an event from a group : `delete-event`
-Deletes the specified event from the specified group.
-
-Format: `delete-event GROUP_INDEX  e/EVENT_INDEX`
-
-`GROUP_INDEX` Constraints:
-* Should match an index in the currently displayed group list.
-
-`EVENT_INDEX` Constraints:
-* Should match an index in the event list of the group specified by `GROUP_INDEX`.
-
-Examples:
-* `delete-event 1 e/2` deletes the 2nd event from the 1st group.
+* `add-event 1 d/Report due 31/10 14:00` adds the event `Report due 31/10 14:00` to the 1st group.
 
 ### Editing an event in a group : `edit-event`
 Edits an event description in the specified group.
@@ -346,6 +329,20 @@ Format: `edit-event GROUP_INDEX e/EVENT_INDEX  d/EVENT_DESCRIPTION`
 Examples:
 * `edit-event 1 e/2 d/MVP Feature Specifications` edits the 2nd event in the 1st group to `MVP Feature Specifications`
 
+### Deleting an event from a group : `delete-event`
+Deletes the specified event from the specified group.
+
+Format: `delete-event GROUP_INDEX  e/EVENT_INDEX`
+
+`GROUP_INDEX` Constraints:
+* Should match an index in the currently displayed group list.
+
+`EVENT_INDEX` Constraints:
+* Should match an index in the event list of the group specified by `GROUP_INDEX`.
+
+Examples:
+* `delete-event 1 e/2` deletes the 2nd event from the 1st group.
+
 ### Setting repository link for a group : `set-repo`
 Set repository link for the specified group.
 
@@ -355,13 +352,17 @@ Format: `set-repo GROUP_INDEX r/REPOSITORY_LINK`
 * Should match an index in the currently displayed group list.
 
 `REPOSITORY_LINK` Constraints:
-* format: \<Domain\>/\<Username or Org\>/\<Repository name\>
-* \<Domain\>: Must start with `https://github.com/` (case-sensitive)
-* \<Username or Org\>: Starts with a letter/digit, can include letters, digits, `-`, **max 39 chars**
-* \<Repository name\>: Starts with a letter/digit, can include letters, digits, `_`, `.`, `-`, **max 100 chars**
-* Does not allow consecutive `_`, `.`, or `-`.
-* Does not allow Username/Org to end with `-`
-* Does not allow repository name to end with `_`, `.`, `-` or `/`
+* Should be a valid URL.
+* Maximum length: 200 characters.
+* Must not contain any whitespace.
+* Protocol (optional): can be http:// or https://.
+* Domain Name (required): must be valid, including a top-level domain (e.g. .com, .org).
+* Path (optional): if present, must start with /.
+
+<box type="warning" block>
+
+**Caution:** Setting the repo link of a group will **overwrite** the original repo link, if it was set.
+</box>
 
 Examples:
 * `set-repo 2 r/https://github.com/AY2526S1-CS2103T-F12-1/tp` sets the repository link in 2nd group to 'https://github.com/AY2526S1-CS2103T-F12-1/tp'
