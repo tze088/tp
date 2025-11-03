@@ -236,7 +236,7 @@ To maintain the integrity of the application, the following invariants must be r
 
 * **Synchronisation:** Care must be taken to ensure that the references to Persons in the group list and the global contact list remain synchronised.
     * Use Existing Methods (e.g., `Model#setPerson`): To modify a person’s details, always use the existing method `Model#setPerson`. This method ensures updates are properly synchronised across the model. Avoid manually calling lower-level methods like `UniquePersonList#setPerson`.
-    * Note: SetPerson is a well-implemented method and serves as a good example for handling updates. While the codebase isn't fully consistent, use similar methods for other objects when available, or manually ensure synchronisation when necessary.
+    * Note: setPerson is a well-implemented method and serves as a good example for handling updates. While the codebase isn't fully consistent, use similar methods for other objects when available, or manually ensure synchronisation when necessary.
 
 The immutability of Persons and Events allows for future implementation of features such as:
 
