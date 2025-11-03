@@ -12,13 +12,11 @@ public class RepoLink {
     public static final String MESSAGE_CONSTRAINTS = "Repository link format: [Protocol]Domain Name[Path]\n"
             + "Example: https://github.com/username/repo\n"
             + "- Total URL Maximum length: 200 characters\n- Protocol (optional): can be http:// or https://\n"
-            + "- Domain Name (required):\n"
-            + "  - Must include a top-level domain (TLD) of at least 2 letters (e.g., .com, .co)\n"
-            + "  - Other domain levels support alphanumeric, '_', '.', or '-'\n"
-            + "- Path (optional): Each path must start with / and support alphanumeric, '_', '.', or '-'\n";
+            + "- Domain Name (required): must be valid, including a top-level domain (e.g., .com, .org)\n"
+            + "- Path (optional): if present, must start with / and contain no spaces\n";
 
     public static final String VALIDATION_REGEX =
-            "^(?=.{1,200}$)(?:https?://)?([A-Za-z0-9.-]+\\.[A-Za-z]{2,})(/[\\w.-]+)*/?$";
+            "^(?=.{1,200}$)(?:https?://)?([A-Za-z0-9.-]+\\.[A-Za-z]{2,})(?:/[^\\s]*)?$";
 
     public final String repolink;
 
