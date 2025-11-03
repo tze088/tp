@@ -402,7 +402,7 @@ Furthermore, certain edits can cause StudyCircle to behave in unexpected ways (e
 acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Linking and redirecting to GitHub Repo / Canvas course website `[coming in v0.1.7]`
+### Linking and redirecting Canvas course website `[coming in v0.1.7]`
 
 _Details coming soon ..._
 
