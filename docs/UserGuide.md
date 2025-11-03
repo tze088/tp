@@ -356,19 +356,26 @@ Examples:
 * `delete-repo 1` deletes repository link from the 1st group.
 
 ### Showing the dashboard of a group: `show-dashboard `
-Shows the dashboard for a group which displays the group's repo link (if any), members and events. The dashboard 
-also allows you to keep track of notes for a group.
+Shows the dashboard for a group which displays the group's repo link (if any), members, events and notes.
 
 Format: `show-dashboard GROUP_INDEX`
 
 * The `GROUP_INDEX` **must be a positive integer** 1, 2, 3, …​
-* The note box on the dashboard panel is editable, and auto-saves your notes on every keystroke
 * While the dashboard is showing, editing that group's fields (members/events/repolink/name) will not update the 
   showing dashboard and will require another `show-dashboard` command to update those fields
 
 Examples:
 * `show-dashboard 1` shows the dashboard of group 1.
+* The dashboard shown will look like the image below
   ![dashboard](images/example-show-dashboard.png)
+
+### Saving notes into the dashboard of a group: 
+In the dashboard section, there is a section with an editable white text box which allows you to save any notes to a 
+group.
+
+* You can navigate the notes section using your keyboard's arrow keys
+* The notes section will auto-save with every keystroke
+* To clear the note box, you can click the red colour `Clear Notes` button
 
 ### Clearing the StudyCircle contact book : `clear`
 Clears the contact book of all groups and contacts.
@@ -402,7 +409,7 @@ Furthermore, certain edits can cause StudyCircle to behave in unexpected ways (e
 acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Linking and redirecting to GitHub Repo / Canvas course website `[coming in v0.1.7]`
+### Linking and redirecting Canvas course website `[coming in v0.1.7]`
 
 _Details coming soon ..._
 

@@ -21,8 +21,8 @@
 
 ## **Setting up, getting started**
 
-Refer to the section "Quick start" in the
-[_User Guide_](https://ay2526s1-cs2103t-f12-1.github.io/tp/UserGuide.html).
+Refer to the guide
+[_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -295,11 +295,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](https://ay2526s1-cs2103t-f12-1.github.io/tp/Documentation.html)
-* [Testing guide](https://ay2526s1-cs2103t-f12-1.github.io/tp/Testing.html)
-* [Logging guide](https://ay2526s1-cs2103t-f12-1.github.io/tp/Logging.html)
-* [Configuration guide](https://ay2526s1-cs2103t-f12-1.github.io/tp/Configuration.html)
-* [DevOps guide](https://ay2526s1-cs2103t-f12-1.github.io/tp/DevOps.html)
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | NUS student managing project groups                     | hide contacts from group projects which have already been completed                     | I do not have to see people in my contacts when I do not have to contact them anymore.              |
 | `*`      | expert user                                             | create shortcuts for tasks                                                              | I can save time on frequently performed tasks.                                                      |
 | `*`      | user who is trying to contact a group of people at once | press one button and copy all the email addresses of people in a group to my clipboard  | I can easily paste it when trying to send an email to all of these members.                         |
-| `*`      | experienced user                                        | turn off the integrated tooltips                                                        | I can declutter my screen                                                                           |
+| `*`      | experienced user                                        | turn off the integrated tooltips                                                        | I can de-clutter my screen                                                                          |
 | `*`      | user                                                    | receive daily/weekly summaries about the deadlines, events and tasks                    | I can plan my workload accordingly                                                                  |
 | `*`      | user                                                    | Set a colour for each group which will show up on a contacts profile                    | I can easily tell what group someone belongs to visually                                            |
 | `*`      | user                                                    | Find which times I am free                                                              | I can easily schedule new meetings with a group                                                     |
@@ -471,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list all groups (UC6)</u>.
 2.  User chooses to delete a group from the list.
-3.  SC deletes the group, keeping the member contacts, and displays the deleted group.
+3.  SC deletes the group, keeping the member contacts, and displays details of the deleted group.
 
   Use case ends.
 
@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SC does not have any contacts currently saved.
 
-    * 1a1. SC shows an error message.
+    * 1a1. SC shows an empty contact list.
 
       Use case ends.
 
@@ -518,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SC does not have any groups currently saved.
 
-    * 1a1. SC shows an error message.
+    * 1a1. SC shows an empty group list.
 
       Use case ends.
 
@@ -540,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. SC does not have the specified contact.
 
-    * 2a1. SC prompts user that there is no matching contact.
+    * 2a1. SC shows the user an empty contact list.
 
       Use case resumes from step 2.
 
@@ -566,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. SC does not have the specified group.
 
-    * 2a1. SC prompts user that there is no matching group.
+    * 2a1. SC shows user an empty group-list.
 
       Use case resumes from step 2.
 
@@ -609,9 +609,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests for a <u>list of groups (UC6)</u>.
-2.  User requests to add a note to the specific group in the list.
-3.  SC adds the note to the group and displays a confirmation message.
+1.  User requests to <u>view a specific group's details (UC8)</u>.
+2.  SC shows the user the details for the specified group
+3.  User adds notes to the group.
 
     Use case ends.
 
@@ -653,6 +653,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *a. At any point the user decides to cancel the operation.
 
   Use case ends.
+
+**System: StudyCircle (SC)**
+**Use Case: UC12 - Start a new project group with a deadline**  
+**Actor: User**
+
+**MSS**
+
+1.  User <u>creates a group (UC1)</u>.
+2.  User <u>adds notes to this group (UC10)</u>.
+3.  User <u>attaches a contact to this group (UC3)</u>.
+    Loop step 3 until all needed contacts are added.
+4.  User <u>creates an Event (UC9o)</u>.
+
+    Loop step 4 until all Events are added.
+
+    Use case ends.
+
+**System: StudyCircle (SC)**  
+**Use Case: UC13 - Delete a contact**  
+**Actor: User**
+
+**MSS**
+
+1.  User requests to <u>list all contacts (UC5)</u>.
+2.  User chooses to delete a contact from the list.
+3.  SC deletes the contact from the list and removes all the groups that he is attached to (if any).
+
+Use case ends.
 
 ### Non-Functional Requirements
 
@@ -845,7 +873,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect add-member commands to try: `delete-member`, `delete-member g/1 `, `delete-member g/x c/x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Showing and editing a group's dashboard
+### Showing a group's dashboard
 
 1. Showing a group's dashboard
 
@@ -862,12 +890,15 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add-member commands to try: `show-dashboard x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. Editing a group's dashboard notes
+### Editing a group's dashboard notes
+
+1. Editing a groups dashboard notes while it is already being shown
 
     1. Prerequisites: The group to edit's dashboard is already shown.
 
     1. Test case: type "I love computing" into the dashboard panel's white note box <br>
-       Expected: The notes typed into the note box will be saved and shown to the user
+       Expected: The notes typed into the note box will be saved and shown to the user when the dashboard is closed 
+       and shown again
        Timestamp in the status bar is updated.
 
 ### Editing a contact
