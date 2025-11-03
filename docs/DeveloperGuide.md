@@ -770,13 +770,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all contacts using the `list-contacts` command. Multiple contacts in the contact list.
 
-    1. Test case: `delete-contact 1`<br>
+    2. Test case: `delete-contact 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete-contact 0`<br>
+    3. Test case: `delete-contact 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete-contact`, `delete-contact x`, `...` (where x is larger than the contact list size)<br>
+    4. Other incorrect delete commands to try: `delete-contact`, `delete-contact x`, `...` (where x is larger than the 
+       contact list size)<br>
        Expected: Similar to previous.
 
 ### Editing a contact
@@ -950,7 +951,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Add an event to a specified group
 
-    1. Prerequisites 1: List all groups using the `list-groups` command. Multiple groups in the group list.
+    1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `add-event 1 d/abc`<br>
        Expected: The status message show: `New event: 'abc' added to group: <1st GROUP NAME>`, an event `abc` appear in the group card of the 1st group.
@@ -959,7 +960,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Delete a specified event from a specified group
 
-    1. Prerequisites 1: List all groups using the `list-groups` command. Multiple groups in the group list.
+    1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `delete-event 1 e/1`<br>
        Expected: The status message show: `Event: '<1st EVENT DESCRIPTION>' deleted from group: <1st GROUP NAME>`, the first event disappeared in the group card of the 1st group.
@@ -968,15 +969,27 @@ testers are expected to do more *exploratory* testing.
 
 1. Edit a specified event in a specified group
 
-    1. Prerequisites 1: List all groups using the `list-groups` command. Multiple groups in the group list.
+    1. Prerequisites: List all groups using the `list-groups` command. Multiple groups in the group list.
 
     1. Test case: `edit-event 1 e/1 d/efg`<br>
        Expected: The status message show: `Edited Event: '<1st EVENT DESCRIPTION>' in Group: <1st GROUP NAME>`, the first event change to `efg` in the group card of the 1st group.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data file
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: If you have pre-existing data saved in StudyCircle, make sure you have a backup of the `data` 
+       folder that is found in the home folder of `StudyCircle.jar`
 
-1. _{ more test cases …​ }_
+    1. Test case: Click into the `data` folder and the `addressbook.json` file. Inside the file edit the data with 
+       invalid inputs (e.g. An email which does not follow the correct format).
+       Expected: All the contacts and groups will be cleared when StudyCircle is launched due to the corrupted data file
+
+2. Restoring the sample data in the contact book
+
+    1. Prerequisites: You must already have an existing `addressbook.json` file in the `data` folder which is found 
+       in the home folder of `StudyCircle.jar`
+
+    1. Test case: Delete the `addressbook.json` file 
+       Expected: Upon the next launch of StudyCircle, the contact book will be repopulated with the sample data
+
