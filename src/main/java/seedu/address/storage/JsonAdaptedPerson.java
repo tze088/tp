@@ -48,7 +48,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
+        email = source.getEmail().value.split("@")[0];
         groupNames.addAll(source.getGroups().stream()
             .map(GroupName::toString)
             .toList());

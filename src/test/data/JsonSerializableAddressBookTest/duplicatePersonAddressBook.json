@@ -2,11 +2,11 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "e0234567@u.nus.edu"
+    "email": "e0234567"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "e0234567@u.nus.edu"
+    "email": "e1234567"
   } ],
   "groups" : [ {
     "persons" : [ ],
