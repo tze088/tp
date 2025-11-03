@@ -34,7 +34,7 @@ SC is optimised for use via a Command Line Interface (CLI) while still allowing 
 
    * `list-contacts` : Lists all contacts.
 
-   * `add-contact n/John Doe p/98765432 e/e1399155@u.nus.edu` : Adds a contact named `John Doe` to the contact list.
+   * `add-contact n/John Doe p/98765432 e/e1399155` : Adds a contact named `John Doe` to the contact list.
 
    * `delete-contact 3` : Deletes the 3rd contact shown in the current contact list.
 
@@ -49,7 +49,7 @@ SC is optimised for use via a Command Line Interface (CLI) while still allowing 
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" block>
 
 **Notes about the command format:**<br>
 
@@ -106,22 +106,28 @@ Format: `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​`
 * Minimum 8 digits
 * Maximum 15 digits
 
-`EMAIL` Constraints:
-* Case-sensitive
-* Must be an NUS email
-* Must follow the format eXXXXXXX@u.nus.edu <span style="color:grey">(e.g., e0123456@u.nus.edu)</span>
+`EMAIL` Constraints: Your NUS ID
+* Must start with ‘e’ (case-sensitive)
+* Followed by 7 digits
+* The domain ‘@u.nus.edu’ is added automatically — you do not need to include it
 
 `GROUP_INDEX` Constraints:
 * Should match an index in the currently displayed group list
 
-<box type="tip" seamless>
+<box type="warning" block>
 
-**Tip:** A contact can be added to multiple groups at once by specifying multiple `g/` prefixes
+**Duplicate handling:** Each contact must have a unique NUS email, while other fields can have duplicates.
+
+</box>
+
+<box type="tip" block>
+
+**Tip:** A contact can be added to multiple groups at once by specifying multiple `g/` prefixes and `GROUP_INDEX` should no t be blank
 </box>
 
 Examples:
-* `add-contact n/John Doe p/98765432 e/e1234567@u.nus.edu` adds a contact with name: John Doe, phone: 98765432, email: e1234567@u.nus.edu to the contact list.
-* `add-contact n/Betsy Crowe g/1 e/e1232567@u.nus.edu p/12345678 g/2` adds a contact with name: Betsy Crowe, phone: 12345678, email: e1232567@u.nus.edu to the contact list and add Betsy Crowe to group 1, 2.
+* `add-contact n/John Doe p/98765432 e/e1234567` adds a contact with name: John Doe, phone: 98765432, email: e1234567@u.nus.edu to the contact list.
+* `add-contact n/Betsy Crowe g/1 e/e1232567 p/12345678 g/2` adds a contact with name: Betsy Crowe, phone: 12345678, email: e1232567@u.nus.edu to the contact list and add Betsy Crowe to group 1, 2.
 
 ### Deleting a contact : `delete-contact`
 Deletes the specified contact from the StudyCircle contact list.
@@ -139,24 +145,27 @@ Examples:
 ### Editing a contact : `edit-contact`
 Edits the details of the specified contact's name, phone, email and groups.
 
-Format: `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP INDEX]...`
+Format: `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP_INDEX]...`
 
 `CONTACT_INDEX` Constraints:
 * Should match an index in the currently displayed contact list
 
 Other parameter are the same as [add-contact](#adding-a-contact-add-contact) command
 
-<box type="tip" seamless>
+<box type="warning" block>
 
-**Tip:** A contact can be added to multiple groups at once by specifying multiple `g/` prefixes
+**Caution:** Using `g/` prefix will **replace** the contact’s existing groups instead of adding to them.
 </box>
-<box type="warning" seamless>
 
-**Caution:** Using `edit-contact` with the `g/` prefix will **replace** the contact’s existing groups instead of adding to them.
+<box type="warning" block>
+
+**Caution:** Using `g/` with blank `GROUP_INDEX` removes the contact from all groups.   
+(Example: `edit-contact 1 g/` removes contact 1 from all groups.)
 </box>
+
 Examples:
 
-* `edit-contact 1 n/John p/12345678 e/e1234567@u.nus.edu g/1 g/2` edits the 1st contact in the current displayed 
+* `edit-contact 1 n/John p/12345678 e/e1234567 g/1 g/2` edits the 1st contact in the current displayed 
   contact list to name John, phone 12345678, email e1234567@u.nus.edu and adds John to group 1 and 2.
 
 ### Listing all contacts : `list-contacts`
@@ -192,7 +201,11 @@ Format: `add-group n/GROUP_NAME`
 * May contain alphanumeric characters, spaces, and the following symbols: `-`, `_`, `(`, `)`
 * Must not be blank
 * Maximum length: 50 characters
+<box type="warning" block>
 
+**Duplicate handling:** Group names must be unique in both name and case.
+
+</box>
 Examples:
 * `add-group n/CS2103T` adds a group with name `CS2103T` to StudyCircle
 * `add-group n/Project Group A` adds a group with name `Project Group A` to StudyCircle
@@ -253,12 +266,12 @@ Format: `add-member GROUP_INDEX c/CONTACT_INDEX [c/CONTACT_INDEX]…​`
 * `CONTACT_INDEXES` can be one or multiple contact indexes
 * `CONTACT_INDEXES` are taken from the currently displayed contact list
 
-<box type="tip" seamless>
+<box type="tip" block>
 
 **Tip:** You can add more than one contact to a group by specifying each extra contact with a `c/` prefix, e.g., `c/1 c/2 c/3`.
 </box>
 
-<box type="warning" seamless>
+<box type="warning" block>
 
 **Caution:** Editing multiple groups at once is not supported. 
 </box>
@@ -355,7 +368,7 @@ Format: `show-dashboard GROUP_INDEX`
 
 Examples:
 * `show-dashboard 1` shows the dashboard of group 1.
-
+  ![dashboard](images/example-show-dashboard.png)
 
 ### Clearing the StudyCircle contact book : `clear`
 Clears the contact book of all groups and contacts.
@@ -380,7 +393,7 @@ save manually.
 StudyCircle data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are 
 welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" block>
 
 **Caution:**
 If your changes to the data file makes its format invalid, StudyCircle will discard all data and start with an empty 
@@ -419,9 +432,9 @@ contains the data of your previous StudyCircle home folder.
 
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add contact**       | `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​` <br> e.g., `add-contact n/John Doe p/98765432 e/e1234567@u.nus.edu g/1 g/2`
+**Add contact**       | `add-contact n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUP_INDEX]…​` <br> e.g., `add-contact n/John Doe p/98765432 e/e1234567 g/1 g/2`
 **Delete contact**    | `delete-contact CONTACT_INDEX`<br> e.g., `delete-contact 3`
-**Edit contact** | `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP INDEX]...` <br> e.g., `edit-contact 1 n/John p/12345678 e/e1234567@u.nus.edu g/1 g/2`
+**Edit contact** | `edit-contact CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP INDEX]...` <br> e.g., `edit-contact 1 n/John p/12345678 e/e1234567 g/1 g/2`
 **Find contact**      | `find-contact KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `find-contact James Jake`
 **List contacts**     | `list-contacts`
 **Add group**       | `add-group n/NAME` <br> e.g., `add-group n/2103T`
