@@ -347,6 +347,9 @@ Format: `delete-event GROUP_INDEX  e/EVENT_INDEX`
 Examples:
 * `delete-event 1 e/2` deletes the 2nd event from the 1st group.
 
+## Managing Links
+---
+
 ### Setting repository link for a group : `set-repo`
 Set repository link for the specified group.
 
@@ -371,8 +374,6 @@ Format: `set-repo GROUP_INDEX r/REPOSITORY_LINK`
 Examples:
 * `set-repo 2 r/https://github.com/AY2526S1-CS2103T-F12-1/tp` sets the repository link in 2nd group to 'https://github.com/AY2526S1-CS2103T-F12-1/tp'
 
-## Managing Links
----
 ### Getting repository link from a group : `get-repo`
 Retrieves the repository link of the specified group and automatically copies it to your clipboard.
 
