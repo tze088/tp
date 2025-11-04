@@ -188,6 +188,8 @@ The internal lists (persons and events) are not exposed except as read-only `Obs
 * `Group.fromStorage`: A factory method used to create a new `Group` from input data (e.g., event list, person list, dashboard). This method is intended to be used only by specific methods and is not typically used for new groups, which should start with empty fields (except for the group name).
 
 * `Group#withUpdatedName`: Returns a new `Group` with copied internal data but a different name. This method is used in commands like edit-group.
+    * This approach ensures that changes are explicit, preventing unintended side effects and making state management more predictable.
+    * While containers like lists or dashboards are copied to avoid modifying the original state, immutable elements are reused to optimize memory.
 
 ##### Why This Design?
 This approach ensures that the `Group` class focuses solely on managing its own data, while global data (like contacts) is updated through methods in the `Model` layer. It keeps the system modular and reduces the risk of unintended side effects.
