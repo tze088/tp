@@ -60,6 +60,11 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.set(index, edited);
     }
 
+    public void setEvents(UniqueEventList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
     /**
      * Removes an {@code Event} from the list.
      * The {@code Event} must already exist in the list.
