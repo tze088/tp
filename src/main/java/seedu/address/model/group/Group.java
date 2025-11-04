@@ -80,7 +80,14 @@ public class Group {
     public Group withUpdatedName(GroupName newName) {
         requireNonNull(newName);
 
-        return new Group(newName, events, persons, repoLink, dashboard);
+        UniqueEventList newEvents = new UniqueEventList();
+        newEvents.setEvents(this.events);
+        UniquePersonList newPersons = new UniquePersonList();
+        newPersons.setPersons(this.persons);
+
+        Group newGroup = new Group(newName, newEvents, newPersons, repoLink);
+        newGroup.setDashboard(dashboard.getNotes());
+        return newGroup;
     }
 
     public GroupName getName() {

@@ -178,6 +178,20 @@ A `Group` has:
 
 and are stored in a single `UniqueGroupList` within an `AddressBook`.
 
+#### Group Methods and Responsibilities
+The `Group` class is responsible for managing its internal members and events, but it does not directly modify the global contact list or other global data. Instead, it ensures internal consistency within the group. Synchronisation with global data is handled by higher-level methods elsewhere in the application.
+
+##### Internal lists and modification
+The internal lists (persons and events) are not exposed except as read-only `ObservableList`s. The only way to modify the group’s state is through its methods such as: `addPerson`, `removePerson`, `addEvent`, and `removeEvent`.
+
+##### Factory and update methods
+* `Group.fromStorage`: A factory method used to create a new `Group` from input data (e.g., event list, person list, dashboard). This method is intended to be used only by specific methods and is not typically used for new groups, which should start with empty fields (except for the group name).
+
+* `Group#withUpdatedName`: Returns a new `Group` with copied internal data but a different name. This method is used in commands like edit-group.
+
+##### Why This Design?
+This approach ensures that the `Group` class focuses solely on managing its own data, while global data (like contacts) is updated through methods in the `Model` layer. It keeps the system modular and reduces the risk of unintended side effects.
+
 #### Key Components
 ##### Unique Lists
 The implementation of `UniqueGroupList` and `UniqueEventList` follow the `UniquePersonList` pattern - that is, they are wrappers on an `ObservableList` which prevent the addition of duplicate entries.
@@ -201,7 +215,7 @@ To maintain the integrity of the application, the following invariants must be r
     * Use Existing High-Level Methods (e.g., `Model#setPerson`): To modify a person’s details, always use the existing method `Model#setPerson`. This method ensures updates are properly synchronised across the model. Avoid manually calling lower-level methods like `UniquePersonList#setPerson`.
     * Note: setPerson is a well-implemented method and serves as a good example for handling updates. While the codebase isn't fully consistent, use similar methods for other objects when available, or manually ensure synchronisation when necessary.
 
-The immutability of Persons and Events allows for future implementation of features such as:
+The immutability of Persons and Events simplifies the future implementation of features such as:
 
 * **State Saving:** Enabling features like undo/redo.
 
