@@ -100,7 +100,8 @@ public class AddMemberCommandTest {
         AddMemberCommand cmd = new AddMemberCommand(INDEX_FIRST_GROUP, persons);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_DUPLICATE_PERSON, ALICE.getNameAsString()), () -> cmd.execute(modelStub));
+                String.format(MESSAGE_DUPLICATE_PERSON, ALICE.getNameAsString()
+                        + " (" + ALICE.getEmail() + ")"), () -> cmd.execute(modelStub));
     }
 
     @Test
@@ -112,9 +113,9 @@ public class AddMemberCommandTest {
 
         GroupName targetGroupName = modelStub.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased()).getName();
         assertEquals(String.format(MESSAGE_SUCCESS,
-                modelStub.getFilteredPersonList().get(1).getNameAsString(),
+                modelStub.getFilteredPersonList().get(1).getNameAsString()
+                + " (" + modelStub.getFilteredPersonList().get(1).getEmail() + ")",
                 targetGroupName), cmd.execute(modelStub).getFeedbackToUser());
-
         assertEquals(cs2103tWithGeorge, modelStub.getFilteredGroupList().get(0));
 
     }

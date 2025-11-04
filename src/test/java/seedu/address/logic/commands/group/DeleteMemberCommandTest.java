@@ -100,7 +100,8 @@ public class DeleteMemberCommandTest {
         Group targetGroup = modelStub.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
 
         assertEquals(String.format(MESSAGE_SUCCESS,
-                targetGroup.getPersons().get(0).getNameAsString(),
+                targetGroup.getPersons().get(0).getNameAsString()
+                + " (" + targetGroup.getPersons().get(0).getEmail() + ")",
                 targetGroup.getName()), cmd.execute(modelStub).getFeedbackToUser());
 
         assertEquals(cs2103tWithoutAlice, modelStub.getFilteredGroupList().get(0));
@@ -117,8 +118,10 @@ public class DeleteMemberCommandTest {
 
         Group targetGroup = modelStub.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
         ObservableList<Person> personList = targetGroup.getPersons();
-        List<String> personListAsString = List.of(personList.get(0).getNameAsString(),
-                personList.get(1).getNameAsString());
+        List<String> personListAsString = List.of(personList.get(0).getNameAsString()
+                + " (" + personList.get(0).getEmail() + ")",
+                personList.get(1).getNameAsString()
+                + " (" + personList.get(1).getEmail() + ")");
 
         assertEquals(String.format(MESSAGE_SUCCESS,
                 personListAsString.stream().collect(Collectors.joining(", ")),
