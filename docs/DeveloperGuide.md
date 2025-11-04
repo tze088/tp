@@ -717,9 +717,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-* 3a. The specified group already has a repository link.
+* 2b. The specified group already has a repository link.
 
-    * 3a1. SC replaces the existing repository link with the new one and notifies the user.
+    * 2b1. SC replaces the existing repository link with the new one and notifies the user.
 
       Use case ends.
 
