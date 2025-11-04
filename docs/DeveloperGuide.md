@@ -318,6 +318,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 ## **Planned Enhancements**
 Team size: 5
 
+1. **Improve text wrapping behaviour in dashboard:**
+    The current dashboard GUI element does not properly wrap text for long member or event entries.
+    As a result, users must manually scroll horizontally to see the entire entry.
+    We plan to implement automatic text wrapping to improve the readability of these entries, ensuring that all content is visible without the need for horizontal scrolling.
+2. **Fix vertical scrolling issue in Event list GUI (Group card):**
+    Currently, the Event list GUI sub-element in the Group card doesn’t handle long event strings properly.
+    When the event string is too long, text wrapping causes the list to scroll vertically, instead of expanding as expected.
+    We plan to fix this by ensuring the event list expands horizontally to accommodate long text without forcing vertical scrolling.
+3. **Clarify event index error message:**
+    Currently, for commands using the event-index prefix, the error message does not specify if the event index is incorrect.
+    Instead, it generically states: "Index is not a non-zero unsigned integer." This could be confusing, especially when the command also uses a group index, as users wouldn’t know which index is causing the error.
+    We’ll update it to "Event index is not a non-zero unsigned integer" to clearly specify which index is invalid when both event and group indexes are used.
+4. **Improve error message for index parsing in command preamble (Contact command):**
+    Currently, index parsing errors in the command preamble (for contact-related commands) result in a generic command usage message.
+    We will update this behavior to specify that the contact index is invalid (if non-empty) with the message "Contact index is not a non-zero unsigned integer", making the error message more informative.
+5. **Improve error message for index parsing in command preamble (Group command):**
+    Currently, index parsing errors in the command preamble (for group-related commands) result in a generic command usage message.
+    We will update this behavior to specify that the group index is invalid (if non-empty) with the message "Group index is not a non-zero unsigned integer", making the error message more informative.
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
