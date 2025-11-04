@@ -487,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User chooses to delete a group from the list.
 3.  SC deletes the group, keeping the member contacts, and displays details of the deleted group.
 
-  Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -506,7 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list all contacts.
 2.  SC displays a list of all contacts and their details.
 
-  Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -526,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list groups.
 2.  SC shows user a list of all groups and their details.
 
-  Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -548,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User requests to view a specific contact’s details in the list.
 3.  SC shows the user the given contact’s details.
 
-  Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -668,7 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**System: StudyCircle (SC)**
+**System: StudyCircle (SC)**  
 **Use Case: UC12 - Start a new project group with a deadline**  
 **Actor: User**
 
@@ -694,7 +694,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User chooses to delete a contact from the list.
 3.  SC deletes the contact from the list and removes all the groups that they are attached to (if any).
 
-Use case ends.
+    Use case ends.
+
+**System: StudyCircle (SC)**  
+**Use Case: UC14 - Set a repository link for a group**  
+**Actor: User**  
+**Preconditions: The specified group already exists within SC**
+
+**MSS**
+
+1.  User requests for a <u>list of groups (UC6)</u>.
+2.  User enters repository link and specified group.
+3.  SC sets the repository link for the specified group and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The repository link input is invalid or empty.
+
+    * 2a1. SC shows an error message.
+
+      Use case resumes from step 2.
+
+* 2b. The specified group already has a repository link.
+
+    * 2b1. SC replaces the existing repository link with the new one and notifies the user.
+
+      Use case ends.
+
+* *a. At any point the user decides to cancel the operation.
+
+  Use case ends.
+
+**System: StudyCircle (SC)**  
+**Use Case: UC15 - Retrieve a Repository Link for a Group**  
+**Actor: User**
+**Preconditions: The specified group already exists within StudyCircle (SC).**
+
+**MSS**
+
+1.  User requests for a <u>list of groups (UC6)</u>.
+2.  User enters the target group to retrieve its repository link.
+3.  SC retrieves the repository link for the specified group.
+4.  SC displays the repository link, copies it to the system clipboard and shows a confirmation message that the link has been copied.
+
+    Use case ends.
+
+**Extensions**
+* 3a. The specified group does not have a repository link set.
+
+    * 3a1. SC shows a message indicating that no repository link has been set for the group.
+
+      Use case ends.
+
+* *a. At any point the user decides to cancel the operation.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
