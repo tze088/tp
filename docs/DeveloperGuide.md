@@ -696,6 +696,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Use case ends.
 
+**System: StudyCircle (SC)**  
+**Use Case: UC14 - Set a repository link for a group**  
+**Actor: User**  
+**Preconditions: The specified group already exists within SC**
+
+**MSS**
+
+1.  User requests for a <u>list of groups (UC6)</u>.
+2.  User enters repository link and specified group.
+3.  SC sets the repository link for the specified group and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The repository link input is invalid or empty.
+
+    * 2a1. SC shows an error message.
+
+      Use case resumes from step 2.
+
+* 3a. The specified group already has a repository link.
+
+    * 3a1. SC replaces the existing repository link with the new one and notifies the user.
+
+      Use case ends.
+
+* *a. At any point the user decides to cancel the operation.
+
+  Use case ends.
+
+**System: StudyCircle (SC)**  
+**Use Case: UC15 - Retrieve a Repository Link for a Group**  
+**Actor: User**
+**Preconditions: The specified group already exists within StudyCircle (SC).**
+
+**MSS**
+
+1.  User requests for a <u>list of groups (UC6)</u>.
+2.  User specifies the target group to retrieve its repository link.
+3.  SC retrieves the repository link for the specified group.
+4.  SC displays the repository link, copies it to the system clipboard and shows a confirmation message that the link has been copied.
+
+    Use case ends.
+
+**Extensions**
+* 3a. The specified group does not have a repository link set.
+
+    * 3a1. SC shows a message indicating that no repository link has been set for the group.
+
+      Use case ends.
+
+* *a. At any point the user decides to cancel the operation.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
